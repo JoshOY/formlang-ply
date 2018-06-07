@@ -1,0 +1,43 @@
+Text("Form description-123")
+
+Text("Line one
+Line two
+Line three")
+
+Text(```
+  # Markdown title
+  This is a **multi-line** example
+```)
+
+ShortInput("Question 1 Title")
+
+required LongInput {
+  title = "Question 2 Title"
+  minLength = 30
+}
+
+required SingleChoice {
+  title = "Question 3 Title"
+}
+
+Select {
+  title = "Question 6 Title"
+  1 = "Option A"
+  2 = "Option B"
+  3 = "Option C"
+}
+
+required MultipleChoice {
+  title = "Question 4 Title"
+  1 = "Yes" {
+    skip = "id0"
+  }
+  2 = "No"
+}
+
+DatePicker {
+  id = "id0"
+  title = "Question 5 Title"
+  startAt = "2018-06-01"
+  endAt = now
+}
