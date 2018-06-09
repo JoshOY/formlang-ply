@@ -13,6 +13,7 @@ reserved = {
     'Select': 'SELECT',
     'DatePicker': 'DATE_PICKER',
     'required': 'REQUIRED',
+    # 'trigger': 'TRIGGER',
 }
 
 tokens = [
@@ -55,9 +56,10 @@ def t_MARKDOWN_STRING(t):
 
 def t_NUMBER(t):
     r'\d+'
+    t.value = int(t.value)
     t.value = {
         'type': 'NUMBER',
-        'val': int(t.value),
+        'val': t.value,
     }
     return t
 
@@ -101,6 +103,8 @@ def p_programme(p):
                  | NEWLINE
                  | form
                  | form NEWLINE"""
+    if p[1] is not None:
+        p[0] = p[1]
 
 def p_form(p):
     """form : question
@@ -108,11 +112,12 @@ def p_form(p):
             | form NEWLINE question
             | form NEWLINE required_question"""
     if len(p) == 2:
-        p[0] = p[1]
-    elif len(p) == 3:
-        p[0] = p[1]
+        p[0] = [p[1]]
     elif len(p) == 4:
-        p[0] = (p[1],) + (p[3],)
+        if not p[1]:
+            p[1] = []
+        p[0] = p[1]
+        p[0].append(p[3])
     print("DEBUG in p_form; p[0] =", p[0])
 
 def p_question_type(p):
@@ -127,25 +132,57 @@ def p_question_type(p):
     print("DEBUG in p_question_type; p[0] =", p[0])
 
 def p_question_body(p):
-    """question_body : LBRACE question_body_content RBRACE
-                     | LBRACE NEWLINE question_body_content RBRACE
-                     | LBRACE question_body_content NEWLINE RBRACE
-                     | LBRACE NEWLINE question_body_content NEWLINE RBRACE"""
+    """question_body : LBRACE p_question_property_definition RBRACE
+                     | LBRACE NEWLINE p_question_property_definition RBRACE
+                     | LBRACE p_question_property_definition NEWLINE RBRACE
+                     | LBRACE NEWLINE p_question_property_definition NEWLINE RBRACE"""
+    if type(p[2]) != str:
+        body_content_props = p[2]['props']
+    else:
+        # print('[!] p[3] =', p[3])
+        body_content_props = p[3]['props']
     p[0] = {
         'node': 'question_body',
+        'props': body_content_props,
     }
 
-def question_body_content(p):
-    """question_body_content: empty
-                            | ID EQ STRING
+def p_question_property_definition(p):
+    """p_question_property_definition : ID EQ STRING
                             | ID EQ MARKDOWN_STRING
-                            | question_body_content NEWLINE ID EQ STRING
-                            | question_body_content NEWLINE ID EQ MARKDOWN_STRING"""
-    if len(p) < 3:
+                            | ID EQ NUMBER
+                            | p_question_property_definition NEWLINE ID EQ STRING
+                            | p_question_property_definition NEWLINE ID EQ MARKDOWN_STRING
+                            | p_question_property_definition NEWLINE ID EQ NUMBER"""
+    if p[0] is None:
         p[0] = {
-            'node': 'question_body_content',
-            'props': {},
+            'node': 'p_question_property_definition',
+            'props': {}
         }
+    props = {}
+    if len(p) <= 4:
+        ID = p[1]
+        VAL = p[3]['val']
+        props[ID] = VAL
+        p[0]['props'][ID] = VAL
+    else:
+        print('[!] p[1] =', p[1])
+        print('[!] p[3] =', p[3])
+        print('[!] p[5] =', p[5])
+        if p[1] is None:
+            p[1] = {
+                'node': 'p_question_property_definition',
+                'props': {}
+            }
+        else:
+            p[0]['props'] = p[1]['props']
+        ID = p[3]
+        VAL = p[5]['val']
+        p[0]['props'][ID] = VAL
+
+# def p_question_trigger_definition(p):
+#     """
+#     question_trigger_definition : TRIGGER
+#     """
 
 def p_question(p):
     """question : question_type LPAREN STRING RPAREN
@@ -169,7 +206,6 @@ def p_question(p):
         }
     print("DEBUG in p_form_element; p[0] =", p[0])
 
-# TODO!!!
 def p_question_complex(p):
     """question : question_type question_body
                 | question_type NEWLINE question_body"""
@@ -184,7 +220,7 @@ def p_question_complex(p):
 def p_required_question(p):
     """required_question : REQUIRED question"""
     p[0] = p[2]
-    p[0]['required'] = True
+    p[0]['props']['required'] = True
 
 def p_empty(p):
     """empty : """
@@ -198,4 +234,5 @@ def p_error(p):
 
 parser = yacc.yacc(debug=True)
 result = parser.parse(input_program)
-print(result)
+
+

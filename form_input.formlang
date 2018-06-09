@@ -4,6 +4,12 @@ required LongInput("Line one
 Line two
 Line three")
 
-required LongInput(```# Line one
-Line two
-Line three```)
+required ShortInput {
+  title = "Question 3 Title"
+  description = ```
+  # Head 1
+  ## Head 2
+  Main content goes here
+  ```
+  minLength = 30
+}
