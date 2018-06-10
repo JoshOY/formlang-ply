@@ -1,0 +1,23 @@
+{
+  "name": "formlang-ply",
+  "version": "1.0.0",
+  "description": "formlang built with PLY",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JoshOY/formlang-ply.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/JoshOY/formlang-ply/issues"
+  },
+  "homepage": "https://github.com/JoshOY/formlang-ply#readme",
+  "dependencies": {
+    "formBuilder": "^2.9.8",
+    "jquery": "^3.3.1"
+  }
+}

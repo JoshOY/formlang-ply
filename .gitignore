@@ -109,3 +109,6 @@ parsetab.py
 
 # Pycharm
 .idea
+
+# npm
+node_modules
