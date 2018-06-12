@@ -1,0 +1,36 @@
+.app-main {
+    display: flex;
+    position: relative;
+    flex-direction: column;
+    width: 100%;
+    min-height: 100vh;
+}
+
+.app-tool-bar {
+    display: block;
+    position: relative;
+    flex: 0 0 50px;
+    background: #e0e0e0;
+}
+
+.app-ui {
+    display: flex;
+    position: relative;
+    flex-direction: row;
+    flex: 1 1 0;
+}
+
+.main-left, .main-right {
+    display: flex;
+    position: relative;
+    flex: 1 0;
+}
+
+.main-left {
+    border-right: 1px solid #e0e0e0;
+}
+
+.src-code-textarea {
+    display: block;
+    height: 650px;
+}

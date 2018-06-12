@@ -17,7 +17,10 @@
   },
   "homepage": "https://github.com/JoshOY/formlang-ply#readme",
   "dependencies": {
+    "codemirror": "^5.38.0",
     "formBuilder": "^2.9.8",
-    "jquery": "^3.3.1"
+    "jquery": "^3.3.1",
+    "normalize.css": "^8.0.0",
+    "treant-js": "^1.0.1"
   }
 }
