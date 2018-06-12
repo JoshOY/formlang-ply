@@ -25,6 +25,10 @@ Select {
   1 = "Option A"
   2 = "Option B"
   3 = "Option C"
+  if choose 1 {
+    disable [id = 1]
+    pass [id = 1]
+  }
 }
 
 required MultipleChoice {
