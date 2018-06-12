@@ -12,6 +12,8 @@ reserved = {
     # 'trigger': 'TRIGGER',
 }
 
+
+# noinspection PyMethodMayBeStatic
 class FormLangParser(BaseParser):
     tokens = [
         "EQ",
