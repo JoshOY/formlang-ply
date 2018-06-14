@@ -63,12 +63,16 @@
 
 /* optional Container STYLES */
 /*#chart-container { height: 600px; width: 750px; margin: 5px; margin: 15px auto; border: 3px solid #DDD; border-radius: 3px; }*/
-#chart-container {
+#chart-container, #form-container {
     display: block;
     position: relative;
     overflow: auto;
     height: calc(100vh - 60px);
     width: 50vw;
+}
+
+#form-container {
+    padding: 16px;
 }
 
 .node { font-size: 11px; }
@@ -105,4 +109,30 @@
     position: relative;
     left: 110%;
     bottom: 112%;
+}
+
+/* question */
+.q {
+    display: block;
+    position: relative;
+    margin: 0 0 25px 0;
+}
+
+.q label {
+    margin-left: 8px;
+}
+
+.qn {
+    display: inline-block;
+    position: relative;
+    font-size: 24px;
+    margin: 0 8px 0 0;
+}
+
+.q-title {
+    display: inline-block;
+    position: relative;
+    font-size: 24px;
+    font-weight: 500;
+    line-height: 1.2;
 }

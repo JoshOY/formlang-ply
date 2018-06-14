@@ -21,6 +21,8 @@
     "codemirror": "^5.38.0",
     "formBuilder": "^2.9.8",
     "jquery": "^3.3.1",
+    "lodash": "^4.17.10",
+    "markdown": "^0.5.0",
     "normalize.css": "^8.0.0",
     "popper.js": "^1.14.3",
     "treant-js": "^1.0.1"

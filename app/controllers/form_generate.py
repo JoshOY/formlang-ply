@@ -87,6 +87,7 @@ async def post_ast_generate(request):
         return web.HTTPBadRequest()
     ast_parser = FormLangASTParser()
     result = ast_parser.input(raw_code)
+    ast_parser.restart()
     # print(result)
     return web.json_response({
         'ok': True,
