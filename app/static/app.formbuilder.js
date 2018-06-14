@@ -34,16 +34,20 @@ function createFormElement(question, idx) {
   if (options) {
     console.info(options);
   }
+  let isRequiredDOM = '';
+  if (question.isRequired) {
+    isRequiredDOM = '<span class="qr">*</span>';
+  }
   switch (question.type) {
     case 'Text':
-      formContainer.append('<section class="q">' +
+      formContainer.append('<section class="q">' + isRequiredDOM +
         '<h2 class="qn">' + (idx + 1).toString() + '. </h2>' +
         '<span class="q-title">' + getParsedString(question.title).value + '</span>' +
         (description ? `<div class="q-desc">${description}</div>` : '') +
         '</section>');
       return null;
     case 'ShortInput':
-      formContainer.append('<section class="q">' +
+      formContainer.append('<section class="q">' + isRequiredDOM +
         '<h2 class="qn">' + (idx + 1).toString() + '. </h2>' +
         '<span class="q-title">' + getParsedString(question.title).value + '</span>' +
         (description ? `<div class="q-desc">${description}</div>` : '') +
@@ -51,7 +55,7 @@ function createFormElement(question, idx) {
         '</section>');
       return null;
     case 'LongInput':
-      formContainer.append('<section class="q">' +
+      formContainer.append('<section class="q">' + isRequiredDOM +
         '<h2 class="qn">' + (idx + 1).toString() + '. </h2>' +
         '<span class="q-title">' + getParsedString(question.title).value + '</span>' +
         (description ? `<div class="q-desc">${description}</div>` : '') +
@@ -61,7 +65,7 @@ function createFormElement(question, idx) {
         '</section>');
       return null;
     case 'SingleChoice':
-      formContainer.append('<section class="q">' +
+      formContainer.append('<section class="q">' + isRequiredDOM +
         '<h2 class="qn">' + (idx + 1).toString() + '. </h2>' +
         '<span class="q-title">' + getParsedString(question.title).value + '</span>' +
         (description ? `<div class="q-desc">${description}</div>` : '') +
@@ -75,7 +79,7 @@ function createFormElement(question, idx) {
         '</section>');
       return null;
     case 'MultipleChoice':
-      formContainer.append('<section class="q">' +
+      formContainer.append('<section class="q">' + isRequiredDOM +
         '<h2 class="qn">' + (idx + 1).toString() + '. </h2>' +
         '<span class="q-title">' + getParsedString(question.title).value + '</span>' +
         (description ? `<div class="q-desc">${description}</div>` : '') +

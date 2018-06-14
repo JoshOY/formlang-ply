@@ -118,6 +118,13 @@
     margin: 0 0 25px 0;
 }
 
+.qr {
+    color: #9c3328;
+    font-size: 16px;
+    font-weight: 500;
+    margin-right: 4px;
+}
+
 .q label {
     margin-left: 8px;
 }
