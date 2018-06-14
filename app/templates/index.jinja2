@@ -3,6 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <link rel="stylesheet" type="text/css" href="/public/normalize.css">
+  <link rel="stylesheet" type="text/css" href="/public/bootstrap/bootstrap.css">
+  <link rel="stylesheet" type="text/css" href="/public/Treant.css">
   <link rel="stylesheet" type="text/css" href="/public/codemirror/lib/codemirror.css">
   <link rel="stylesheet" type="text/css" href="/public/codemirror/theme/neat.css">
   <link rel="stylesheet" type="text/css" href="/public/app.css">
@@ -11,17 +13,24 @@
 <body>
   <main id="app-main" class="app-main">
     <div class="app-tool-bar">
-      <h1>FormLang AST Visualizer</h1>
+      <h1>
+        <span>FormLang AST Visualizer</span>
+        <button class="btn btn-primary app-parse-btn" id="app-parse-btn">Parse source code</button>
+      </h1>
     </div>
     <div class="app-ui">
       <div class="main-left">
         <textarea id="src-code-textarea" class="src-code-textarea"></textarea>
       </div>
-      <div class="main-right">Main right</div>
+      <div class="main-right">
+        <div id="chart-container" class="chart-container"></div>
+      </div>
     </div>
   </main>
   <script type="text/javascript" src="/public/jquery.js"></script>
   <script type="text/javascript" src="/public/jquery-ui.min.js"></script>
+  <script type="text/javascript" src="/public/bootstrap.js"></script>
+  <script type="text/javascript" src="/public/raphael.js"></script>
   <script type="text/javascript" src="/public/Treant.js"></script>
   <!-- code mirror -->
   <script type="text/javascript" src="/public/codemirror/lib/codemirror.js"></script>

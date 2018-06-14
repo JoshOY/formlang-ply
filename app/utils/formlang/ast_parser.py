@@ -80,7 +80,7 @@ class FormLangASTParser(BaseParser):
         return t
 
     def t_NEWLINE(self, t):
-        r'\n+'
+        r'((?:\n)|(?:\r\n))+'
         t.lexer.lineno += t.value.count("\n")
         t.value = ('NEWLINE', t.value)
         return t
