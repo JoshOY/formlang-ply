@@ -1,4 +1,5 @@
 function newTreantDiagram(ASTData) {
+  $('#chart-container').empty();
   const chartConfig = {
     chart: {
       container: '#chart-container',

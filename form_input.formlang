@@ -1,10 +1,10 @@
 Text("Form description-123")
 
-required LongInput("Line one
+required ShortInput("Line one
 Line two
 Line three")
 
-required ShortInput {
+required LongInput {
   title = "Question 3 Title"
   description = ```
   # Head 1
@@ -12,4 +12,11 @@ required ShortInput {
   Main content goes here
   ```
   minLength = 30
+}
+
+required SingleChoice {
+  title = "Question 4 Title"
+  1 = "Option 1"
+  2 = "Option 2"
+  3 = "Option 3"
 }

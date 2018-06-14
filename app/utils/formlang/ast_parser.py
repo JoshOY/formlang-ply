@@ -108,8 +108,12 @@ class FormLangASTParser(BaseParser):
     def p_form(self, p):
         """form : question
                 | required_question
+                | question_complex
+                | required_question_complex
                 | form NEWLINE question
-                | form NEWLINE required_question"""
+                | form NEWLINE question_complex
+                | form NEWLINE required_question
+                | form NEWLINE required_question_complex"""
         if len(p) == 2:
             p[0] = ('form', p[1])
         elif len(p) == 4:
@@ -155,13 +159,11 @@ class FormLangASTParser(BaseParser):
     def p_block_end(self, p):
         """block_end : RBRACE
                      | NEWLINE RBRACE
-                     | RBRACE NEWLINE
-                     | NEWLINE RBRACE NEWLINE
         """
         p[0] = ('block_end',)
 
     def p_question_complex(self, p):
-        """question : question_type block_start block_end
+        """question_complex : question_type block_start block_end
                     | question_type block_start question_body block_end"""
         if len(p) == 4:
             p[0] = ('question_complex', p[1],)
@@ -170,7 +172,9 @@ class FormLangASTParser(BaseParser):
 
     def p_question_body(self, p):
         """question_body : question_property_definition
-                         | question_body NEWLINE question_property_definition"""
+                         | question_option_definition
+                         | question_body NEWLINE question_property_definition
+                         | question_body NEWLINE question_option_definition"""
         if len(p) == 2:
             p[0] = ('question_body', p[1])
         else:
@@ -182,8 +186,17 @@ class FormLangASTParser(BaseParser):
                                 | ID EQ NUMBER"""
         p[0] = ('question_property_definition', p[1], p[2], p[3])
 
+    def p_question_option_definition(self, p):
+        """question_option_definition : NUMBER EQ STRING
+                                      | NUMBER EQ MARKDOWN_STRING"""
+        p[0] = ('question_option_definition', p[1], p[2], p[3])
+
     def p_required_question(self, p):
         """required_question : REQUIRED question"""
+        p[0] = ('required', p[2])
+
+    def p_required_question_complex(self, p):
+        """required_question_complex : REQUIRED question_complex"""
         p[0] = ('required', p[2])
 
     def p_empty(self, p):
