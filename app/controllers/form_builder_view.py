@@ -3,13 +3,13 @@ import aiohttp_jinja2
 import json
 from ..routes import app_routes
 
-@app_routes.view('/')
-class IndexView(web.View):
-    @aiohttp_jinja2.template('index.jinja2')
+@app_routes.view('/formbuilder')
+class FormBuilderView(web.View):
+    @aiohttp_jinja2.template('formbuilder.jinja2')
     async def get(self):
-        return { 'src_code_init': None }
+        return {'src_code_init': None}
 
-    @aiohttp_jinja2.template('index.jinja2')
+    @aiohttp_jinja2.template('formbuilder.jinja2')
     async def post(self):
         request_body = await self.request.post()
         src_code_init = request_body['srccode']

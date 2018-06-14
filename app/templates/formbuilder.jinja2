@@ -14,10 +14,10 @@
   <main id="app-main" class="app-main">
     <div class="app-tool-bar">
       <h1>
-        <span>FormLang AST Visualizer</span>
-        <button class="btn btn-primary app-parse-btn" id="app-parse-btn">Parse source code</button>
-        <form style="display: inline-block;" method="post" action="/formbuilder">
-          <button class="btn btn-default goto-btn" id="goto-btn" type="submit">Switch to Form Builder</button>
+        <span>FormLang Form Builder</span>
+        <button class="btn btn-primary app-parse-btn" id="app-parse-btn">Build form</button>
+        <form style="display: inline-block;" method="post" action="/">
+          <button class="btn btn-default goto-btn" id="goto-btn" type="submit">Switch to AST Visualizer</button>
           <textarea id="hidden-form-textarea" name="srccode" style="display: none; visibility: hidden;"></textarea>
         </form>
       </h1>
@@ -43,7 +43,6 @@
   <!-- code mirror end -->
   <script type="text/javascript" src="/public/formlang.mode.js"></script>
   <script type="text/javascript" src="/public/app.init.js"></script>
-  <script type="text/javascript" src="/public/app.ast.js"></script>
   <script type="text/javascript">
     window.editor.setValue({{ (src_code_init or '\"\"') | safe }});
   </script>

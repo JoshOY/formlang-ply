@@ -51,10 +51,14 @@
     height: 100%;
 }
 
-.app-parse-btn {
+.app-parse-btn, .goto-btn {
     position: relative;
     margin-left: 36px;
     bottom: 2px;
+}
+
+.goto-btn {
+    margin-left: 18px;
 }
 
 /* optional Container STYLES */
