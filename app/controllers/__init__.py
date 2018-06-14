@@ -2,4 +2,5 @@
 from .ast_generate import *
 from .ast_view import *
 from .form_builder_view import *
+from .form_generate import *
 

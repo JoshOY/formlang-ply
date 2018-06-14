@@ -22,8 +22,8 @@ def transform_structure(ast):
 def get_node_type(node):
     return node['text']['name']
 
-def get_node_value(node, val_key):
-    return node['children'][0]
+def get_node_value(node):
+    return node['children'][0]['text']['desc']
 
 def transform_form(node, form=[], parent=None):
     # case Programme
@@ -41,12 +41,35 @@ def transform_form(node, form=[], parent=None):
     # case question
     elif get_node_type(node) == 'question':
         form.append({})
-        string_node = node['children'][0]
-        form[-1]['title'] = string_node['children'][0]['desc']
+        type_node = node['children'][0]
+        type = type_node['children'][0]['children'][0]['text']['desc']
+        # print('Found type =', type)
+        form[-1]['type'] = type
+        string_node = node['children'][1]
+        form[-1]['title'] = string_node['children'][0]['text']['desc']
     # case question_complex
     elif get_node_type(node) == 'question_complex':
-        type_node = node[0]
-        body_node = node[1]
+        form.append({})
+        type_node = node['children'][0]
+        type = type_node['children'][0]['children'][0]['text']['desc']
+        # print('Found type =', type)
+        form[-1]['type'] = type
+        body_node = node['children'][1]
+        transform_form(body_node)
+    # case question_body
+    elif get_node_type(node) == 'question_body':
+        for def_node in node['children']:
+            transform_form(def_node)
+    elif get_node_type(node) == 'question_option_definition':
+        number = get_node_value(node['children'][0])
+        option_text = get_node_value(node['children'][2])
+        if 'options' not in form[-1]:
+            form[-1]['options'] = {}
+        form[-1]['options'][number] = option_text
+    elif get_node_type(node) == 'question_property_definition':
+        key = get_node_value(node['children'][0])
+        val = get_node_value(node['children'][2])
+        form[-1][key] = val
     return form
 
 
@@ -64,7 +87,7 @@ async def post_ast_generate(request):
         return web.HTTPBadRequest()
     ast_parser = FormLangASTParser()
     result = ast_parser.input(raw_code)
-    print(result)
+    # print(result)
     return web.json_response({
         'ok': True,
         'result': transform_structure(result),

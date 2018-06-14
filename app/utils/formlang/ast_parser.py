@@ -142,11 +142,11 @@ class FormLangASTParser(BaseParser):
                     | question_type LPAREN MARKDOWN_STRING NEWLINE RPAREN
                     | question_type LPAREN NEWLINE MARKDOWN_STRING NEWLINE RPAREN"""
         if len(p) == 5:
-            p[0] = ('question', p[3])
+            p[0] = ('question', p[1], p[3])
         elif p[3][0] != 'NEWLINE':
-            p[0] = ('question', p[4])
+            p[0] = ('question', p[1], p[4])
         else:
-            p[0] = ('question', p[3])
+            p[0] = ('question', p[1], p[3])
 
     def p_block_start(self, p):
         """block_start : LBRACE

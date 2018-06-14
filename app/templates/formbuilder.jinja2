@@ -15,7 +15,7 @@
     <div class="app-tool-bar">
       <h1>
         <span>FormLang Form Builder</span>
-        <button class="btn btn-primary app-parse-btn" id="app-parse-btn">Build form</button>
+        <button class="btn btn-primary app-parse-btn" id="app-form-build-btn">Build form</button>
         <form style="display: inline-block;" method="post" action="/">
           <button class="btn btn-default goto-btn" id="goto-btn" type="submit">Switch to AST Visualizer</button>
           <textarea id="hidden-form-textarea" name="srccode" style="display: none; visibility: hidden;"></textarea>
@@ -43,6 +43,7 @@
   <!-- code mirror end -->
   <script type="text/javascript" src="/public/formlang.mode.js"></script>
   <script type="text/javascript" src="/public/app.init.js"></script>
+  <script type="text/javascript" src="/public/app.formbuilder.js"></script>
   <script type="text/javascript">
     window.editor.setValue({{ (src_code_init or '\"\"') | safe }});
   </script>
