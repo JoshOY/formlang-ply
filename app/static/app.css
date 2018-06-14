@@ -58,7 +58,14 @@
 }
 
 /* optional Container STYLES */
-#chart-container { height: 600px; width: 750px; margin: 5px; margin: 15px auto; border: 3px solid #DDD; border-radius: 3px; }
+/*#chart-container { height: 600px; width: 750px; margin: 5px; margin: 15px auto; border: 3px solid #DDD; border-radius: 3px; }*/
+#chart-container {
+    display: block;
+    position: relative;
+    overflow: auto;
+    height: calc(100vh - 60px);
+    width: 50vw;
+}
 
 .node { font-size: 11px; }
 
@@ -90,7 +97,8 @@
 }
 
 .node-desc {
+    /*display: inline-block;*/
     position: relative;
     left: 110%;
-    bottom: 120%;
+    bottom: 112%;
 }
